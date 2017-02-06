@@ -1,0 +1,14 @@
+---
+# vars file for runc-ansible
+
+# feel free to change this to a specific version...
+runc_version: master
+
+# Where we'll install runc
+runc_install_directory: /usr/src/runc
+
+# The runc git clone location
+runc_git_url: https://github.com/opencontainers/runc.git
+
+# Optional build tags.
+runc_make_buildtags: "BUILDTAGS='seccomp selinux'"

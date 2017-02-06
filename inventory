@@ -1,0 +1,11 @@
+runc_test ansible_host=192.168.122.61
+
+[runc_targets]
+runc_test
+
+[runc_targets:vars]
+ansible_ssh_user=root
+# ansible_become=true
+# ansible_become_user=root
+# ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p root@192.168.1.119"'
+# ansible_ssh_private_key_file=/home/doug/.ssh/id_testvms

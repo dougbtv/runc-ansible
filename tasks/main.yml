@@ -1,0 +1,38 @@
+---
+# tasks file for runc-ansible
+
+- name: Install dependencies
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - libseccomp-devel
+    - golang
+
+- name: Clone runc
+  git:
+    repo: "{{ runc_git_url }}"
+    dest: "{{ runc_install_directory }}"
+    version: "{{ runc_version }}"
+
+- name: Run make
+  shell: >
+    make {{ runc_make_buildtags }}
+  args: 
+    chdir: "{{ runc_install_directory }}"
+
+- name: Run make install
+  shell: >
+    make install
+  args: 
+    chdir: "{{ runc_install_directory }}"
+
+- name: Get runc version
+  shell: >
+    runc --version | grep -i vers
+  register: installed_runc_version
+
+- name: Show runc version
+  debug: "msg={{ installed_runc_version.stdout }}"
+
